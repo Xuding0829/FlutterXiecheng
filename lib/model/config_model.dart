@@ -1,5 +1,5 @@
 class ConfigModel {
-  late String searchUrl;
+  final String? searchUrl;
 
   ConfigModel(this.searchUrl);
 

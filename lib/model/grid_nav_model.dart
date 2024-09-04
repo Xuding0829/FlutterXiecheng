@@ -2,9 +2,9 @@ import 'package:xiecheng/model/commom_model.dart';
 
 //首页网格卡片模型
 class GridNavModel {
-  late GridNavItem hotel;
-  late GridNavItem flight;
-  late GridNavItem travel;
+  final GridNavItem? hotel;
+  final GridNavItem? flight;
+  final GridNavItem? travel;
 
   GridNavModel(this.hotel, this.flight, this.travel);
 
@@ -17,19 +17,25 @@ class GridNavModel {
 }
 
 class GridNavItem {
-  late String startColor;
-  late String endColor;
-  late CommonModel mainItem;
-  late CommonModel item1;
-  late CommonModel item2;
-  late CommonModel item3;
-  late CommonModel item4;
+  final String? startColor;
+  final String? endColor;
+  final CommonModel? mainItem;
+  final CommonModel? item1;
+  final CommonModel? item2;
+  final CommonModel? item3;
+  final CommonModel? item4;
 
   GridNavItem(this.startColor, this.endColor, this.mainItem, this.item1,
       this.item2, this.item3, this.item4);
 
   factory GridNavItem.fromJson(Map<String, dynamic> json) {
-    return GridNavItem(json['startColor'], json['endColor'], json['mainItem'],
-        json['item1'], json['item2'], json['item3'], json['item4']);
+    return GridNavItem(
+        json['startColor'],
+        json['endColor'],
+        CommonModel.fromJson(json['mainItem']),
+        CommonModel.fromJson(json['item1']),
+        CommonModel.fromJson(json['item2']),
+        CommonModel.fromJson(json['item3']),
+        CommonModel.fromJson(json['item4']));
   }
 }

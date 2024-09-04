@@ -1,9 +1,9 @@
 class CommonModel {
-  late String icon;
-  late String title;
-  late String url;
-  late String statusBarColor;
-  late bool hideAppBar;
+  final String? icon;
+  final String? title;
+  final String? url;
+  final String? statusBarColor;
+  final bool? hideAppBar;
 
   CommonModel(
       this.icon, this.title, this.url, this.statusBarColor, this.hideAppBar);
