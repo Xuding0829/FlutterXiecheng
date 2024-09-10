@@ -2,9 +2,9 @@ import 'package:xiecheng/model/commom_model.dart';
 
 //首页网格卡片模型
 class GridNavModel {
-  final GridNavItem? hotel;
-  final GridNavItem? flight;
-  final GridNavItem? travel;
+  final GridNavItem hotel;
+  final GridNavItem flight;
+  final GridNavItem travel;
 
   GridNavModel(this.hotel, this.flight, this.travel);
 
@@ -17,13 +17,13 @@ class GridNavModel {
 }
 
 class GridNavItem {
-  final String? startColor;
-  final String? endColor;
-  final CommonModel? mainItem;
-  final CommonModel? item1;
-  final CommonModel? item2;
-  final CommonModel? item3;
-  final CommonModel? item4;
+  final String startColor;
+  final String endColor;
+  final CommonModel mainItem;
+  final CommonModel item1;
+  final CommonModel item2;
+  final CommonModel item3;
+  final CommonModel item4;
 
   GridNavItem(this.startColor, this.endColor, this.mainItem, this.item1,
       this.item2, this.item3, this.item4);

@@ -8,6 +8,7 @@ import 'package:xiecheng/pages/search_page.dart';
 import 'package:xiecheng/pages/speak_page.dart';
 import 'package:xiecheng/util/navifator_util.dart';
 import 'package:flutter_splash_screen/flutter_splash_screen.dart';
+import 'package:xiecheng/widgets/grid_nav.dart';
 
 const searchBarText = '网红打卡地 景点 酒店 美食';
 const APPBAR_SCROLL_OFFSET = 100;

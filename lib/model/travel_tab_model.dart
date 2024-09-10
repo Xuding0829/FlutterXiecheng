@@ -16,6 +16,15 @@ class TravelTabModel {
     return TravelTabModel(
         json['params'] as Map<String, dynamic>?, json['url'] as String, tabs);
   }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['url'] = this.url;
+    if (tabs != null) {
+      data['tabs'] = tabs!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
 }
 
 class TravelTab {
