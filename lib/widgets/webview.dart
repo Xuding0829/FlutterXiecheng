@@ -5,14 +5,14 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 const CATCH_URLS = ['m.ctrip.com/', 'm.ctrip.com/html5/', 'm.ctrip.com/html5'];
 
-class WebView extends StatefulWidget {
+class Webview extends StatefulWidget {
   final String url;
   final String? statusBarColor;
   final String? title;
   final bool hideAppBar;
   final bool backForbid;
 
-  WebView(
+  Webview(
       {required url,
       this.statusBarColor,
       this.title,
@@ -23,10 +23,10 @@ class WebView extends StatefulWidget {
             : url);
 
   @override
-  _WebViewState createState() => _WebViewState();
+  _WebviewState createState() => _WebviewState();
 }
 
-class _WebViewState extends State<WebView> {
+class _WebviewState extends State<Webview> {
   final Completer<WebViewController> _controller =
       Completer<WebViewController>();
   bool exiting = false;
@@ -48,8 +48,42 @@ class _WebViewState extends State<WebView> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    String statusBarColorStr = widget.statusBarColor ?? "ffffff";
+    Color backButtonColor =
+        (statusBarColorStr == 'ffffff') ? Colors.black : Colors.white;
+
+    return Scaffold(
+      body: Column(
+        children: [
+          _appBar(
+            Color(int.parse('0xff' + statusBarColorStr)),
+            backButtonColor,
+          ),
+          Expanded(
+            child: WebView(
+              initialUrl: widget.url,
+              JavaScriptMode: JavaScriptMode.unrestricted,
+              gestureNavigationEnabled: true,
+              onWebViewCreated: (WebViewController webViewController) {
+                _controller.complete(webViewController);
+              },
+              onProgress: (int progress) {
+                print("WebView is loading (progress : $progress%)");
+              },
+              navigationDelegate: (NavigationRequest request) {
+                return NavigationDecision.navigate;
+              },
+              onPageStarted: (String url) {
+                print('Page started loading: $url');
+              },
+              onPageFinished: (String url) {
+                print('Page finished loading: $url');
+              },
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   // @override
@@ -82,58 +116,42 @@ class _WebViewState extends State<WebView> {
   //   );
   // }
 
-  // AppBar _appBar(Color backgroundColor, Color backButtonColor) {
-  //   String statusBarColorStr = widget.statusBarColor ?? 'ffffff';
-  //   Color backButtonColor =
-  //       (statusBarColorStr == 'ffffff' ? Colors.black : Colors.white);
-  //   return Container(
-  //       color: backgroundColor,
-  //       padding: EdgeInsets.fromLTRB(0, 40, 0, 10),
-  //       child: FractionallySizedBox(
-  //         widthFactor: 1,
-  //         child: Stack(
-  //           children: <Widget>[
-  //             GestureDetector(
-  //               onTap: () {
-  //                 Navigator.pop(context);
-  //               },
-  //               child: Container(
-  //                 margin: EdgeInsets.only(left: 10),
-  //                 child: Icon(
-  //                   Icons.close,
-  //                   color: backButtonColor,
-  //                   size: 26,
-  //                 ),
-  //               ),
-  //             ),
-  //             Positioned(
-  //               left: 0,
-  //               right: 0,
-  //               child: Center(
-  //                   child: Text(
-  //                 widget.title ?? '',
-  //                 style: TextStyle(color: backgroundColor, fontSize: 20),
-  //               )),
-  //             )
-  //           ],
-  //         ),
-  //       ));
-  // }
-
-  AppBar _appBar(Color backgroundColor, Color backButtonColor) {
-    return AppBar(
-      backgroundColor: backgroundColor,
-      leading: IconButton(
-        icon: Icon(Icons.arrow_back, color: backButtonColor),
-        onPressed: () {
-          Navigator.pop(context);
-        },
-      ),
-      title: Text(
-        widget.title ?? '',
-        style: TextStyle(color: Colors.white, fontSize: 20),
-      ),
-    );
+  _appBar(Color backgroundColor, Color backButtonColor) {
+    String statusBarColorStr = widget.statusBarColor ?? 'ffffff';
+    Color backButtonColor =
+        (statusBarColorStr == 'ffffff' ? Colors.black : Colors.white);
+    return Container(
+        color: backgroundColor,
+        padding: EdgeInsets.fromLTRB(0, 40, 0, 10),
+        child: FractionallySizedBox(
+          widthFactor: 1,
+          child: Stack(
+            children: <Widget>[
+              GestureDetector(
+                onTap: () {
+                  Navigator.pop(context);
+                },
+                child: Container(
+                  margin: EdgeInsets.only(left: 10),
+                  child: Icon(
+                    Icons.close,
+                    color: backButtonColor,
+                    size: 26,
+                  ),
+                ),
+              ),
+              Positioned(
+                left: 0,
+                right: 0,
+                child: Center(
+                    child: Text(
+                  widget.title ?? '',
+                  style: TextStyle(color: backgroundColor, fontSize: 20),
+                )),
+              )
+            ],
+          ),
+        ));
   }
 
   @override

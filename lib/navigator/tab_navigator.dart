@@ -22,19 +22,21 @@ class _TabNavigatorState extends State<TabNavigator> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:PageView(
+      body: PageView(
         controller: _controller,
-        children: <Widget>[HomePage(),
-        SearchPage(),],
-      );
-    )
+        children: <Widget>[
+          HomePage(),
+          SearchPage(),
+        ],
+      ),
+    );
   }
 
   bottomItem(String title, IconDate icon, int index) {
     return BottomNavigationBarItem(
       icon: Icon(icon, color: defaultColor),
       activeIcon: Icon(icon, color: activeColor),
-      title: Text(title,
+      label: Text(title,
           style: TextStyle(
               color: currentIndex != index ? defaultColor : activeColor)),
     );

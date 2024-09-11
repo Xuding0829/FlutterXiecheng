@@ -41,7 +41,7 @@ class LocalNav extends StatelessWidget {
       onTap: () {
         NavigatorUtil.push(
             context,
-            WebView(
+            Webview(
               url: model.url,
               statusBarColor: model.statusBarColor,
               hideAppBar: model.hideAppBar,

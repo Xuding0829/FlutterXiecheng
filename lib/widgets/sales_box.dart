@@ -58,7 +58,7 @@ class SalesBox extends StatelessWidget {
                   onTap: () {
                     NavigatorUtil.push(
                         context,
-                        WebView(
+                        Webview(
                           url: salesBox!.moreUrl,
                           title: '更多活动',
                         ));
@@ -95,7 +95,7 @@ class SalesBox extends StatelessWidget {
         onTap: () {
           NavigatorUtil.push(
             context,
-            WebView(
+            Webview(
               url: model.url,
               statusBarColor: model.statusBarColor,
               hideAppBar: model.hideAppBar,
