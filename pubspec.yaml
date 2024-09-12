@@ -37,7 +37,7 @@ dependencies:
   cupertino_icons: any
   http: any
   webview_flutter: any
-
+  dio: any
   
 dev_dependencies:
   flutter_test:

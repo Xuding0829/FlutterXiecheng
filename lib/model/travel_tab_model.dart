@@ -1,7 +1,7 @@
 class TravelTabModel {
   Map<String, dynamic>? params;
-  String? url;
-  List<TravelTab>? tabs;
+  String url;
+  List<TravelTab> tabs;
 
   TravelTabModel(this.params, this.url, this.tabs);
 
@@ -20,9 +20,7 @@ class TravelTabModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['url'] = this.url;
-    if (tabs != null) {
-      data['tabs'] = tabs!.map((v) => v.toJson()).toList();
-    }
+    data['tabs'] = tabs.map((v) => v.toJson()).toList();
     return data;
   }
 }

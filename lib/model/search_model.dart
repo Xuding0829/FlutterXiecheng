@@ -1,14 +1,18 @@
 class SearchModel {
-  String? keyword;
-  final List<SearchItem> data;
+  String keyword;
+  List<SearchItem> data;
 
-  SearchModel(this.data);
+  SearchModel({
+    required this.keyword,
+    required this.data,
+  });
 
   factory SearchModel.fromJson(Map<String, dynamic> json) {
     var dataJson = json['data'] as List;
     List<SearchItem> data =
         dataJson.map((i) => SearchItem.fromJson(i)).toList();
-    return SearchModel(data);
+
+    return SearchModel(keyword: json['keyword'] ?? '', data: data);
   }
 }
 

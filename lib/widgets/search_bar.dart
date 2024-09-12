@@ -2,37 +2,37 @@ import 'package:flutter/material.dart';
 
 enum SearchBarType { home, normal, homeLight }
 
-class SearchBar extends StatefulWidget {
+class Searchbar extends StatefulWidget {
   final bool enabled;
   final bool? hideLeft;
-  final SearchBarType searchBarType;
+  final SearchBarType? searchBarType;
   final String? hint;
   final String? defaultText;
-  final void Function()? leftButtonClick;
-  final void Function()? rightButtonClick;
-  final void Function()? speakClick;
-  final void Function()? inputBoxClick;
-  final ValueChanged<String>? onChanged;
+  final void Function() leftButtonClick;
+  final void Function() rightButtonClick;
+  final void Function() speakClick;
+  final void Function() inputBoxClick;
+  final ValueChanged<String> onChanged;
 
-  const SearchBar(
+  const Searchbar(
       {Key? key,
       this.enabled = true,
       this.hideLeft,
       this.searchBarType = SearchBarType.normal,
       this.hint,
-      this.defaultText,
-      this.leftButtonClick,
-      this.rightButtonClick,
-      this.speakClick,
-      this.inputBoxClick,
-      this.onChanged})
+      required this.defaultText,
+      required this.leftButtonClick,
+      required this.rightButtonClick,
+      required this.speakClick,
+      required this.inputBoxClick,
+      required this.onChanged})
       : super(key: key);
 
   @override
   _SearchBarState createState() => _SearchBarState();
 }
 
-class _SearchBarState extends State<SearchBar> {
+class _SearchBarState extends State<Searchbar> {
   bool showClear = false;
   final TextEditingController _controller = TextEditingController();
 
@@ -64,7 +64,7 @@ class _SearchBarState extends State<SearchBar> {
                     ? null
                     : Icon(Icons.arrow_back_ios, color: Colors.grey, size: 26),
               ),
-              widget.leftButtonClick ?? () {}),
+              widget.leftButtonClick),
           Expanded(
             flex: 1,
             child: _inputBOx(),
@@ -77,7 +77,7 @@ class _SearchBarState extends State<SearchBar> {
                   style: TextStyle(color: Colors.blue, fontSize: 17),
                 ),
               ),
-              widget.rightButtonClick ?? () {})
+              widget.rightButtonClick)
         ],
       ),
     );
@@ -99,7 +99,7 @@ class _SearchBarState extends State<SearchBar> {
                   ],
                 ),
               ),
-              widget.leftButtonClick ?? () {}),
+              widget.leftButtonClick),
           Expanded(
             flex: 1,
             child: _inputBOx(),
@@ -113,7 +113,7 @@ class _SearchBarState extends State<SearchBar> {
                   size: 26,
                 ),
               ),
-              widget.rightButtonClick ?? () {})
+              widget.rightButtonClick)
         ],
       ),
     );
@@ -168,7 +168,7 @@ class _SearchBarState extends State<SearchBar> {
                           style: TextStyle(fontSize: 13, color: Colors.grey),
                         ),
                       ),
-                      widget.inputBoxClick ?? () {})),
+                      widget.inputBoxClick)),
           !showClear
               ? _wrapTap(
                   Icon(
@@ -178,7 +178,7 @@ class _SearchBarState extends State<SearchBar> {
                         ? Colors.blue
                         : Colors.grey,
                   ),
-                  widget.inputBoxClick ?? () {})
+                  widget.inputBoxClick)
               : _wrapTap(
                   Icon(
                     Icons.clear,
@@ -215,9 +215,7 @@ class _SearchBarState extends State<SearchBar> {
       });
     }
 
-    if (widget.onChanged != null) {
-      widget.onChanged!(text);
-    }
+    widget.onChanged(text);
   }
 
   _homeFontColor() {

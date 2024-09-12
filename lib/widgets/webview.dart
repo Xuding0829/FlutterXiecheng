@@ -9,14 +9,15 @@ class Webview extends StatefulWidget {
   final String url;
   final String? statusBarColor;
   final String? title;
-  final bool hideAppBar;
+  final bool? hideAppBar;
   final bool backForbid;
 
   Webview(
-      {required url,
+      {Key? key,
+      required url,
       this.statusBarColor,
       this.title,
-      this.hideAppBar = false,
+      this.hideAppBar,
       this.backForbid = false})
       : url = (url.contains('ctrip.com')
             ? url.replaceAll("http://", "https://")
@@ -29,7 +30,6 @@ class Webview extends StatefulWidget {
 class _WebviewState extends State<Webview> {
   final Completer<WebViewController> _controller =
       Completer<WebViewController>();
-  bool exiting = false;
 
   @override
   void initState() {
@@ -85,36 +85,6 @@ class _WebviewState extends State<Webview> {
       ),
     );
   }
-
-  // @override
-  // Widget build(BuildContext context) {
-  //   String statusBarColorStr = widget.statusBarColor ?? 'ffffff';
-
-  //   Color backButtonColor =
-  //       (statusBarColorStr == 'ffffff') ? Colors.black : Colors.white;
-
-  //   return Scaffold(
-  //     body: Column(
-  //       children: <Widget>[
-  //         _appBar(
-  //           Color(int.parse('0xff' + statusBarColorStr)),
-  //           WebviewScaffold(
-  //             userAgent: 'null',
-  //             url: widget.url,
-  //             withLocalStorage: true,
-  //             hidden: true,
-  //             initialChild: Container(
-  //               color: Colors.white,
-  //               child: Center(
-  //                 child: Text("waiting..."),
-  //               ),
-  //             ),
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
 
   _appBar(Color backgroundColor, Color backButtonColor) {
     String statusBarColorStr = widget.statusBarColor ?? 'ffffff';
